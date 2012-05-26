@@ -1,4 +1,4 @@
 sliSearch
 =========
 
-Integration plugin for the SLI Systems search
+Integration plugin for the [SLI Systems](http://www.sli-systems.com/) search.
