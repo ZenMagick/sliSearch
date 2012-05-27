@@ -54,6 +54,7 @@ class SliSearchPlugin extends Plugin {
         $this->addConfigValue('Client Id', 'clientId', '', 'SLI Systems client id for this site.');
         $this->addConfigValue('Client Name', 'clientName', '', 'SLI Systems client name for this site.');
         $this->addConfigValue('Search Domain', 'searchDomain', '', 'Domain name for search results.');
+        $this->addConfigValue('Cookie Domain', 'cookieDomain', '', 'Domain name for shared cookie.');
         $this->addConfigValue('Conversion Tracker', 'conversionTracker', 'false', 'Enable SLI Systems conversion tracker.',
             'widget@booleanFormWidget#name=conversionTracker&default=false&label=Conversion Tracker');
         $this->addConfigValue('Product identifier', 'identifier', 'productId', 'Select whether to use productId or model to identify products',
@@ -150,6 +151,7 @@ EOT;
                 $this->order = $context['currentOrder'];
             }
         }
+        $this->setDataCookie($event->get('request'));
     }
 
     /**
@@ -198,4 +200,23 @@ spark.writeTransactionCode();
 EOT;
         return $code;
     }
+
+    /**
+     * Set the sli data cookie.
+     *
+     * @param ZMRequest request The current request.
+     */
+    protected function setDataCookie($request) {
+        $languageCode = $request->getSession()->getLanguage()->getCode();
+        $cartCount = count($request->getShoppingCart()->getItems());
+        $currencyCode = $request->getSession()->getCurrencyCode();
+        $data = array(
+            'ut' => $request->getSession()->getType(),
+            'sc' => $cartCount,
+            'lang' => $languageCode,
+            'cur' => $currencyCode
+        );
+        setrawcookie('zm_sli_data', http_build_query($data), 0, '/', $this->get('cookieDomain'));
+    }
+
 }
