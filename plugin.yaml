@@ -16,4 +16,6 @@ meta:
         description: The client name for this site
         type: text
         config:
+          default: ''
+          value: abc
           size: 12
