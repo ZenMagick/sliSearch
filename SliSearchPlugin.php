@@ -59,12 +59,12 @@ class SliSearchPlugin extends Plugin {
             'widget@booleanFormWidget#name=conversionTracker&default=false&label=Conversion Tracker');
         $this->addConfigValue('Product identifier', 'identifier', 'productId', 'Select whether to use productId or model to identify products',
             'widget@selectFormWidget#name=identifier&options='.urlencode('productId=Product Id&model=Model'));
-        // spark key / version?
         $this->addConfigValue('Ajax Search', 'ajaxSearch', 'false', 'Enable Ajax Search support.',
             'widget@booleanFormWidget#name=ajaxSearch&default=false&label=Ajax Search');
-        $this->addConfigValue('Rich Auto Complete', 'richAutoComplete', 'false', 'Enable Rich Auto Complete support.',
-            'widget@booleanFormWidget#name=richAutoComplete&default=false&label=Rich Auto Complete');
-        // rac version, rac revision
+        $this->addConfigValue('Rich Auto Complete', 'rac', 'false', 'Enable Rich Auto Complete support.',
+            'widget@booleanFormWidget#name=rac&default=false&label=Rich Auto Complete');
+        $this->addConfigValue('Rich Auto Complete Version', 'racVersion', '', 'Version of Rich Auto Complete to use.');
+        $this->addConfigValue('Rich Auto Complete Revision', 'racRevision', '', 'Revision of Rich Auto Complete to use.');
 
         $this->addConfigValue('Debug', "debug", 'true', 'Generate code, but make inactive.',
             'widget@booleanFormWidget#name=debug&default=true&label=Debug&style=checkbox');
@@ -104,7 +104,7 @@ class SliSearchPlugin extends Plugin {
      * @return string The rich auto complete header code to inject.
      */
     protected function getRichAutoCompleteHeader() {
-        if (!$this->get('richAutoComplete')) {
+        if (!$this->get('rac')) {
             return '';
         }
         $clientName = $this->get('clientName');
@@ -126,7 +126,7 @@ EOT;
      * @return string The rich auto complete footer code to inject.
      */
     protected function getRichAutoCompleteFooter() {
-        if (!$this->get('richAutoComplete')) {
+        if (!$this->get('rac')) {
             return '';
         }
         $clientName = $this->get('clientName');
@@ -166,6 +166,7 @@ EOT;
         if (null == $this->order) {
             return '';
         }
+        $order = $this->order;
         $itemLineTemplate = 'spark.addItem("%s", "%s", "%s");';
         $itemLines = '';
         foreach ($this->order->getOrderItems() as $orderItem) {
