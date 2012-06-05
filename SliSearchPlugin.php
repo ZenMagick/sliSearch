@@ -208,7 +208,7 @@ EOT;
      * @param ZMRequest request The current request.
      */
     protected function setDataCookie($request) {
-        $languageCode = $request->getSession()->getLanguage()->getCode();
+        $languageCode = null != ($language = $request->getSession()->getLanguage()) ? $language->getCode() : '';
         $cartCount = count($request->getShoppingCart()->getItems());
         $currencyCode = $request->getSession()->getCurrencyCode();
         $data = array(
