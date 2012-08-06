@@ -71,15 +71,6 @@ class SliSearchPlugin extends Plugin {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    public function init() {
-        parent::init();
-        $eventDispatcher = $this->container->get('eventDispatcher');
-        $eventDispatcher->listen($this);
-    }
-
-    /**
      * Content processing callback.
      */
     public function onFinaliseContent($event) {
