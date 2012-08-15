@@ -21,6 +21,7 @@ namespace zenmagick\plugins\sliSearch;
 
 use Plugin;
 use zenmagick\base\Runtime;
+use zenmagick\http\Request;
 use zenmagick\http\view\TemplateView;
 
 /**
@@ -70,14 +71,6 @@ class SliSearchPlugin extends Plugin {
             'widget@booleanFormWidget#name=debug&default=true&label=Debug&style=checkbox');
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function init() {
-        parent::init();
-        $eventDispatcher = $this->container->get('eventDispatcher');
-        $eventDispatcher->listen($this);
-    }
 
     /**
      * Content processing callback.
