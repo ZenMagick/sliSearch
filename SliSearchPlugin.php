@@ -19,7 +19,7 @@
  */
 namespace zenmagick\plugins\sliSearch;
 
-use Plugin;
+use zenmagick\apps\store\plugins\Plugin;
 use zenmagick\base\Runtime;
 use zenmagick\http\Request;
 use zenmagick\http\view\TemplateView;
@@ -37,9 +37,8 @@ class SliSearchPlugin extends Plugin {
     /**
      * Create new instance.
      */
-    public function __construct() {
-        parent::__construct();
-        $this->setContext('storefront');
+    public function __construct(array $config) {
+        parent::__construct($config);
         $this->order = null;
     }
 

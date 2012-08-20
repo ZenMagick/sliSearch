@@ -3,19 +3,69 @@ meta:
   version: '${zenmagick.version}'
   author: 'zenmagick.org'
   description: 'Support for SLI Systems search'
+
+  context: storefront
   options:
     groups:
-      default: { title: Default }
       ajax: { title: Ajax Search }
       rac: { title: Rich Auto Complete }
       ct: { title: Conversion Tracker }
     properties:
+      clientId:
+        title: The client id
+        description: The client id for this site
       clientName:
-        group: default
-        name: The client name
+        title: The client name
         description: The client name for this site
-        type: text
         config:
-          default: ''
+          default: ""
           value: abc
           size: 12
+      cookieDomain:
+        group: default
+        title: Cookie domain name
+        description: Domain name for shared cookie
+      ajaxSearch:
+        title: Ajax Search
+        description: Enable Ajax Search support
+        type: boolean
+        config:
+          default: false
+      debug:
+        title: Debug
+        description: Generate code, but make inactive
+        type: boolean
+        config:
+          default: true
+      conversionTracker:
+        group: ct
+        title: Conversion Tracker
+        description: Enable SLI Systems conversion tracker
+        type: boolean
+        config:
+          default: false
+      identifier:
+        group: ct
+        title: Product identifier
+        description: Product identification key
+        type: list
+        config:
+          default: productId
+          values:
+            productId: Product Id
+            model: Model
+      rac:
+        group: rac
+        title: Rich Auto Complete
+        description: Enable Rich Auto Complete support
+        type: boolean
+        config:
+          default: false
+      racVersion:
+        group: rac
+        title: Rich Auto Complete Version
+        description: Version of Rich Auto Complete to use
+      racRevision:
+        group: rac
+        title: Rich Auto Complete Revision
+        description: Revision of Rich Auto Complete to use
