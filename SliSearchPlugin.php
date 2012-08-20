@@ -70,7 +70,6 @@ class SliSearchPlugin extends Plugin {
             'widget@booleanFormWidget#name=debug&default=true&label=Debug&style=checkbox');
     }
 
-
     /**
      * Content processing callback.
      */
