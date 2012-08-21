@@ -44,33 +44,6 @@ class SliSearchPlugin extends Plugin {
 
 
     /**
-     * {@inheritDoc}
-     */
-    public function install() {
-        parent::install();
-
-        // include catalog feed?
-
-        $this->addConfigValue('Client Id', 'clientId', '', 'SLI Systems client id for this site.');
-        $this->addConfigValue('Client Name', 'clientName', '', 'SLI Systems client name for this site.');
-        $this->addConfigValue('Search Domain', 'searchDomain', '', 'Domain name for search results.');
-        $this->addConfigValue('Cookie Domain', 'cookieDomain', '', 'Domain name for shared cookie.');
-        $this->addConfigValue('Conversion Tracker', 'conversionTracker', 'false', 'Enable SLI Systems conversion tracker.',
-            'widget@booleanFormWidget#name=conversionTracker&default=false&label=Conversion Tracker');
-        $this->addConfigValue('Product identifier', 'identifier', 'productId', 'Select whether to use productId or model to identify products',
-            'widget@selectFormWidget#name=identifier&options='.urlencode('productId=Product Id&model=Model'));
-        $this->addConfigValue('Ajax Search', 'ajaxSearch', 'false', 'Enable Ajax Search support.',
-            'widget@booleanFormWidget#name=ajaxSearch&default=false&label=Ajax Search');
-        $this->addConfigValue('Rich Auto Complete', 'rac', 'false', 'Enable Rich Auto Complete support.',
-            'widget@booleanFormWidget#name=rac&default=false&label=Rich Auto Complete');
-        $this->addConfigValue('Rich Auto Complete Version', 'racVersion', '', 'Version of Rich Auto Complete to use.');
-        $this->addConfigValue('Rich Auto Complete Revision', 'racRevision', '', 'Revision of Rich Auto Complete to use.');
-
-        $this->addConfigValue('Debug', "debug", 'true', 'Generate code, but make inactive.',
-            'widget@booleanFormWidget#name=debug&default=true&label=Debug&style=checkbox');
-    }
-
-    /**
      * Content processing callback.
      */
     public function onFinaliseContent($event) {
