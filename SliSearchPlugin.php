@@ -17,12 +17,12 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street - Fifth Floor, Boston, MA  02110-1301, USA.
  */
-namespace zenmagick\plugins\sliSearch;
+namespace ZenMagick\plugins\sliSearch;
 
-use zenmagick\apps\store\plugins\Plugin;
-use zenmagick\base\Runtime;
-use zenmagick\http\Request;
-use zenmagick\http\view\TemplateView;
+use ZenMagick\Base\Plugins\Plugin;
+use ZenMagick\Base\Runtime;
+use ZenMagick\Http\Request;
+use ZenMagick\Http\View\TemplateView;
 
 /**
  * SLI Search plugin.
