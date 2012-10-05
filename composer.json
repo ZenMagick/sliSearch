@@ -1,0 +1,15 @@
+{
+    "name": "zenmagick/plugin-slisearch",
+    "type": "zenmagick-plugin",
+    "description": "Add support for SLI Systems search to ZenMagick",
+    "license": "GPL-2.0+",
+    "require": {
+        "zenmagick/zenmagick-installer": "*"
+    },
+    "authors": [
+        {
+            "name": "Martin Rademacher",
+            "email": "mano@zenmagick.org"
+        }
+    ]
+}
