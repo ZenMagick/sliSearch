@@ -47,7 +47,7 @@ class SliSearchPlugin extends Plugin {
      * Content processing callback.
      */
     public function onFinaliseContent($event) {
-        $content = $event->get('content');
+        $content = $event->getArgument('content');
 
         $header = $this->getRichAutoCompleteHeader();
         $footer = $this->getRichAutoCompleteFooter().$this->getConversionTracker();
@@ -59,7 +59,7 @@ class SliSearchPlugin extends Plugin {
 
         $content = preg_replace('/<\/head>/', $header . '</head>', $content, 1);
         $content = preg_replace('/<\/body>/', $footer . '</body>', $content, 1);
-        $event->set('content', $content);
+        $event->setArgument('content', $content);
     }
 
     /**
@@ -108,14 +108,14 @@ EOT;
      * Start view callback.
      */
     public function onViewStart($event) {
-        $request = $event->get('request');
-        if ('checkout_success' == $request->getRequestId() && $event->has('view') && null != ($view = $event->get('view')) && $view instanceof TemplateView) {
+        $request = $event->getArgument('request');
+        if ('checkout_success' == $request->getRequestId() && $event->hasArgument('view') && null != ($view = $event->getArgument('view')) && $view instanceof TemplateView) {
             $context = $view->getVariables();
             if (array_key_exists('currentOrder', $context)) {
                 $this->order = $context['currentOrder'];
             }
         }
-        $this->setDataCookie($event->get('request'));
+        $this->setDataCookie($event->getArgument('request'));
     }
 
     /**
