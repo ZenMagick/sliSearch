@@ -20,7 +20,6 @@
 namespace ZenMagick\plugins\sliSearch;
 
 use ZenMagick\Base\Plugins\Plugin;
-use ZenMagick\Base\Runtime;
 use ZenMagick\Http\Request;
 use ZenMagick\Http\View\TemplateView;
 
@@ -31,22 +30,24 @@ use ZenMagick\Http\View\TemplateView;
  *
  * @author DerManoMann <mano@zenmagick.org>
  */
-class SliSearchPlugin extends Plugin {
+class SliSearchPlugin extends Plugin
+{
     private $order;
 
     /**
      * Create new instance.
      */
-    public function __construct(array $config) {
+    public function __construct(array $config)
+    {
         parent::__construct($config);
         $this->order = null;
     }
 
-
     /**
      * Content processing callback.
      */
-    public function onFinaliseContent($event) {
+    public function onFinaliseContent($event)
+    {
         $content = $event->getArgument('content');
 
         $header = $this->getRichAutoCompleteHeader();
@@ -67,7 +68,8 @@ class SliSearchPlugin extends Plugin {
      *
      * @return string The rich auto complete header code to inject.
      */
-    protected function getRichAutoCompleteHeader() {
+    protected function getRichAutoCompleteHeader()
+    {
         if (!$this->get('rac')) {
             return '';
         }
@@ -81,6 +83,7 @@ document.write(unescape('%3Clink rel="stylesheet" type="text/css" href="' + sliJ
 document.write(unescape('%3Clink rel="stylesheet" type="text/css" href="' + sliJsHost + '$clientName.resultspage.com/rac/sli-rac.css?rev=$racRevision" /%3E'));
 </script>
 EOT;
+
         return $code;
     }
 
@@ -89,7 +92,8 @@ EOT;
      *
      * @return string The rich auto complete footer code to inject.
      */
-    protected function getRichAutoCompleteFooter() {
+    protected function getRichAutoCompleteFooter()
+    {
         if (!$this->get('rac')) {
             return '';
         }
@@ -101,13 +105,15 @@ var sliJsHost = (("https:" == document.location.protocol) ? "https://"  : "http:
 document.write(unescape('%3Cscript src="' + sliJsHost + '$clientName.resultspage.com/rac/sli-rac.config.js?rev=$racRevision" type="text/javascript"%3E%3C/script%3E'));
 </script>
 EOT;
+
         return $code;
     }
 
     /**
      * Start view callback.
      */
-    public function onViewStart($event) {
+    public function onViewStart($event)
+    {
         $request = $event->getArgument('request');
         if ('checkout_success' == $request->getRequestId() && $event->hasArgument('view') && null != ($view = $event->getArgument('view')) && $view instanceof TemplateView) {
             $context = $view->getVariables();
@@ -123,7 +129,8 @@ EOT;
      *
      * @return string The conversion tracker code.
      */
-    protected function getConversionTracker() {
+    protected function getConversionTracker()
+    {
         if (!$this->get('conversionTracker') || null == $this->order) {
             return '';
         }
@@ -163,6 +170,7 @@ spark.writeTrackCode();
 spark.writeTransactionCode();
 </script>
 EOT;
+
         return $code;
     }
 
@@ -171,7 +179,8 @@ EOT;
      *
      * @param zenmagick\http\Request request The current request.
      */
-    protected function setDataCookie(Request $request) {
+    protected function setDataCookie(Request $request)
+    {
         $languageCode = null != ($language = $request->getSession()->getLanguage()) ? $language->getCode() : '';
         $cartCount = count($request->getShoppingCart()->getItems());
         $currencyCode = $request->getSession()->getCurrencyCode();
